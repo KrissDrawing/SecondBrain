@@ -16,5 +16,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/no-unstable-nested-components': 'off',
 		'@typescript-eslint/no-use-before-define': 'off',
+		'import/prefer-default-export': 'off',
+		'react/jsx-props-no-spreading': 'off',
 	},
 };

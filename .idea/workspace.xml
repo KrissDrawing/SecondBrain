@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierrc.js" afterDir="false" />
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: add habit fields with checkable buttons">
+      <change afterPath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/HabitField/HabitField.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/HabitField/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/navigation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ModalScreen.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsc.tsx.child.0" />
+        <option value="tsc.tsx.child.1" />
+        <option value="tsc" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,6 +41,32 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="4" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1657560502" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1657560501" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="ProjectId" id="2BlI6foGFBiBPte8Kuy4rL8L7VB" />
   <component name="ProjectViewState">
@@ -69,8 +110,19 @@
       <workItem from="1657474651761" duration="1770000" />
       <workItem from="1657476566380" duration="1662000" />
       <workItem from="1657479503345" duration="686000" />
-      <workItem from="1657558095800" duration="1671000" />
+      <workItem from="1657558095800" duration="7938000" />
+      <workItem from="1657635847301" duration="2681000" />
+      <workItem from="1657643062234" duration="3943000" />
+      <workItem from="1657651133538" duration="1334000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: add eslint + prettier">
+      <created>1657560606685</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657560606685</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,6 +139,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: add eslint + prettier" />
+    <MESSAGE value="feat: add habit fields with checkable buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add habit fields with checkable buttons" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
