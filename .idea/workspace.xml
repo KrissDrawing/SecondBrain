@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: add habit fields with checkable buttons">
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="fix: types and habit screen name">
+      <change afterPath="$PROJECT_DIR$/redux/app/hooks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/app/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/LinkingConfiguration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/LinkingConfiguration.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/TabOneScreen.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/types.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +20,7 @@
         <option value="tsc.tsx.child.0" />
         <option value="tsc.tsx.child.1" />
         <option value="tsc" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -107,7 +107,7 @@
       <workItem from="1657635847301" duration="2681000" />
       <workItem from="1657643062234" duration="3943000" />
       <workItem from="1657651133538" duration="1642000" />
-      <workItem from="1657735724723" duration="1200000" />
+      <workItem from="1657735724723" duration="1675000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -123,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657654102040</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix: types and habit screen name">
+      <created>1657737269893</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657737269893</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +151,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: add eslint + prettier" />
     <MESSAGE value="feat: add habit fields with checkable buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add habit fields with checkable buttons" />
+    <MESSAGE value="fix: types and habit screen name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: types and habit screen name" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
