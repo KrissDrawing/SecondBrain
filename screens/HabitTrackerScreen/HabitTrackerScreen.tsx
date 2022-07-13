@@ -11,56 +11,27 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { HabitType } from './HabitTrackerScreen.types';
 import { HabitField } from '../../components/HabitField';
 // eslint-disable-next-line import/extensions
 import { RootStackParams } from '../../App';
-
-const habitsTmp: HabitType[] = [
-	{
-		id: 1,
-		name: 'gabit1',
-		checked: false,
-	},
-	{
-		id: 2,
-		name: 'habit2',
-		checked: false,
-	},
-	{
-		id: 3,
-		name: 'habit3',
-		checked: false,
-	},
-];
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
+import { add, check } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
+	const habits = useAppSelector((state) => state.habits.habitsList);
+	const dispatch = useAppDispatch();
 	const [habitName, setHabitName] = useState('');
-	const [habits, setHabits] = useState<HabitType[]>(habitsTmp);
 
 	const handleHabitChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
 		setHabitName(e.nativeEvent.text);
-	};
-
-	const onAddHabit = () => {
-		setHabits((prevState) => [...prevState, { id: habits.length, name: habitName, checked: false }]);
-	};
-
-	const onHabitCheckPress = (index: number) => {
-		const newHabits = habits;
-		newHabits[index] = {
-			...newHabits[index],
-			checked: true,
-		};
-		setHabits([...newHabits]);
 	};
 
 	return (
 		<View>
 			<View style={styles.addHabit}>
 				<TextInput value={habitName} style={styles.textInput} onChange={handleHabitChange} />
-				<Button title="Add" onPress={onAddHabit} />
+				<Button title="Add" onPress={() => dispatch(add({ id: habits.length, name: habitName, checked: false }))} />
 			</View>
 			<ScrollView style={styles.root} horizontal>
 				{habits.map((habit, index) => (
@@ -69,7 +40,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 						<Pressable
 							onPress={() =>
 								navigation.navigate('Modal', {
-									onHabitCheckPress: () => onHabitCheckPress(index),
+									onHabitCheckPress: () => dispatch(check((index))),
 								})
 							}>
 							<Text>Im pressable!</Text>

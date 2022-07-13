@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="fix: types and habit screen name">
-      <change afterPath="$PROJECT_DIR$/redux/app/hooks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redux/app/store.ts" afterDir="false" />
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: set up redux-toolkit">
+      <change afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/features/habits/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +82,11 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/redux/app" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name=".eslintrc.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/.eslintrc.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -107,7 +113,7 @@
       <workItem from="1657635847301" duration="2681000" />
       <workItem from="1657643062234" duration="3943000" />
       <workItem from="1657651133538" duration="1642000" />
-      <workItem from="1657735724723" duration="1675000" />
+      <workItem from="1657735724723" duration="4275000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -130,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657737269893</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: set up redux-toolkit">
+      <created>1657737730787</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657737730787</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +165,8 @@
     <MESSAGE value="feat: add eslint + prettier" />
     <MESSAGE value="feat: add habit fields with checkable buttons" />
     <MESSAGE value="fix: types and habit screen name" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: types and habit screen name" />
+    <MESSAGE value="feat: set up redux-toolkit" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: set up redux-toolkit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
