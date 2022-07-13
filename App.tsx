@@ -9,7 +9,7 @@ export type RootStackParams = {
 	Modal: {
 		onHabitCheckPress: () => void;
 	};
-	TabOne: undefined;
+	HabitsTracker: undefined;
 };
 
 export default function App() {

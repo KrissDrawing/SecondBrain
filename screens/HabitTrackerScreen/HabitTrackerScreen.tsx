@@ -16,12 +16,28 @@ import { HabitField } from '../../components/HabitField';
 // eslint-disable-next-line import/extensions
 import { RootStackParams } from '../../App';
 
+const habitsTmp: HabitType[] = [
+	{
+		id: 1,
+		name: 'gabit1',
+		checked: false,
+	},
+	{
+		id: 2,
+		name: 'habit2',
+		checked: false,
+	},
+	{
+		id: 3,
+		name: 'habit3',
+		checked: false,
+	},
+];
 
-
-export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'TabOne'>) {
+export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
 	const [habitName, setHabitName] = useState('');
-	const [habits, setHabits] = useState<HabitType[]>([]);
+	const [habits, setHabits] = useState<HabitType[]>(habitsTmp);
 
 	const handleHabitChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
 		setHabitName(e.nativeEvent.text);
@@ -50,9 +66,12 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 				{habits.map((habit, index) => (
 					<View key={habit.id} style={[habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}>
 						<HabitField habit={habit.name} />
-						<Pressable onPress={() => navigation.navigate('Modal', {
-							onHabitCheckPress: () => onHabitCheckPress(index),
-						})}>
+						<Pressable
+							onPress={() =>
+								navigation.navigate('Modal', {
+									onHabitCheckPress: () => onHabitCheckPress(index),
+								})
+							}>
 							<Text>Im pressable!</Text>
 						</Pressable>
 					</View>
