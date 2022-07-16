@@ -3,7 +3,8 @@ export interface HabitsState {
 }
 
 export interface HabitType {
-	name: string,
-	id: number,
-	checked: boolean,
+	name: string;
+	id: string;
+	checked: boolean;
+	created_at: string;
 }

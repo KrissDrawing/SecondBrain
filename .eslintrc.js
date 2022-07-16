@@ -18,6 +18,9 @@ module.exports = {
 		'@typescript-eslint/no-use-before-define': 'off',
 		'import/prefer-default-export': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'react/jsx-no-useless-fragment': 'off',
+		'import/extensions': 'off',
+		'no-void': 'off',
 		'no-param-reassign': ["error", { "props": false }],
 	},
 };
