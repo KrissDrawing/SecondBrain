@@ -14,12 +14,11 @@ import { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
-import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
-import { add, check, set, useAddHabitMutation, useGetHabitsQuery } from '../../redux/features/habits';
+import { useAppDispatch } from '../../redux/app/hooks';
+import { check, set, useAddHabitMutation, useGetHabitsQuery } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
-	const habits = useAppSelector((state) => state.habits.habitsList);
 	const dispatch = useAppDispatch();
 	const [habitName, setHabitName] = useState('');
 
@@ -37,46 +36,42 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 	};
 
 	const handleAddHabit = () => {
-		addHabit({ name: habitName, checked: false })
-			.unwrap()
-			.then((res) => {
-				dispatch(add(res));
-			})
-			.catch((e) => console.error(e));
+		void addHabit({ name: habitName, checked: false });
+		// TODO: handle errors
 	};
 
+	if (!data && isLoading) {
+		return (
+			<View style={styles.loaderRoot}>
+				<ActivityIndicator size="large" />
+			</View>
+		);
+	}
+
 	return (
-		<>
-			{isLoading ? (
-				<View style={styles.loaderRoot}>
-					<ActivityIndicator size="large" />
-				</View>
-			) : (
-				<View>
-					<View style={styles.addHabit}>
-						<>
-							<TextInput value={habitName} style={styles.textInput} onChange={handleHabitChange} />
-							<Button title="Add" onPress={handleAddHabit} />
-						</>
+		<View>
+			<View style={styles.addHabit}>
+				<>
+					<TextInput value={habitName} style={styles.textInput} onChange={handleHabitChange} />
+					<Button title="Add" onPress={handleAddHabit} />
+				</>
+			</View>
+			<ScrollView style={styles.root} horizontal>
+				{data!.map((habit, index) => (
+					<View key={habit.id} style={[habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}>
+						<HabitField habit={habit.name} />
+						<Pressable
+							onPress={() =>
+								navigation.navigate('Modal', {
+									onHabitCheckPress: () => dispatch(check(index)),
+								})
+							}>
+							<Text>Im pressable!</Text>
+						</Pressable>
 					</View>
-					<ScrollView style={styles.root} horizontal>
-						{habits.map((habit, index) => (
-							<View key={habit.id} style={[habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}>
-								<HabitField habit={habit.name} />
-								<Pressable
-									onPress={() =>
-										navigation.navigate('Modal', {
-											onHabitCheckPress: () => dispatch(check(index)),
-										})
-									}>
-									<Text>Im pressable!</Text>
-								</Pressable>
-							</View>
-						))}
-					</ScrollView>
-				</View>
-			)}
-		</>
+				))}
+			</ScrollView>
+		</View>
 	);
 }
 

@@ -55,9 +55,22 @@ export const habitsApi = createApi({
 					const newDocRef = doc(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
 					const newHabit = { ...habit, created_at: new Date().toUTCString(), id: newDocRef.id };
 					await setDoc(newDocRef, newHabit);
+					add(newHabit);
 					return { data: newHabit };
 				} catch (e) {
 					return { error: { message: 'cant add habits' } };
+				}
+			},
+			async onQueryStarted(data, { dispatch, queryFulfilled }) {
+				try {
+					const { data: updatedHabit } = await queryFulfilled;
+					dispatch(
+						habitsApi.util.updateQueryData('getHabits', undefined, (draft) => {
+							draft.push(updatedHabit);
+						})
+					)
+				} catch {
+					console.error('couldnt update habits after adding one');
 				}
 			},
 		}),
