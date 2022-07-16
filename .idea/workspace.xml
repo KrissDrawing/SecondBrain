@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: update getHabits query cache after add new habit">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="style: change scrollList orientation, improve visuals&#10;&#10;add check, delete mutations">
+      <change afterPath="$PROJECT_DIR$/metro.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +119,8 @@
       <workItem from="1657778037180" duration="17000" />
       <workItem from="1657824374720" duration="3079000" />
       <workItem from="1657908062953" duration="11401000" />
-      <workItem from="1657967191873" duration="6497000" />
+      <workItem from="1657967191873" duration="14153000" />
+      <workItem from="1657990659782" duration="3623000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -165,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657970781650</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: update getHabits query cache after add new habit">
+      <created>1657976142059</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1657976142059</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +204,8 @@
     <MESSAGE value="feat: move add and check habits to redux-toolkit" />
     <MESSAGE value="feat: add firestore with ability to fetch and add habits" />
     <MESSAGE value="feat: update getHabits query cache after add new habit" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: update getHabits query cache after add new habit" />
+    <MESSAGE value="style: change scrollList orientation, improve visuals&#10;&#10;add check, delete mutations" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: change scrollList orientation, improve visuals&#10;&#10;add check, delete mutations" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

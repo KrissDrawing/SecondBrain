@@ -12,12 +12,13 @@ export function HabitField(props: HabitFieldProps) {
 
 const styles = StyleSheet.create({
 	root: {
-		width: '200px',
+		flex: 1,
+		width: '50vw',
 		height: '10vh',
 		color: 'white',
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#abc'
+		backgroundColor: '#abc',
 	},
 });

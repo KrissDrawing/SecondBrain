@@ -29,6 +29,7 @@
     "expo-system-ui": "~1.2.0",
     "expo-web-browser": "~10.2.0",
     "firebase": "^9.9.0",
+    "luxon": "^3.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/luxon": "^2.3.2",
     "@types/react": "18.0.8",
     "@types/react-native": "~0.66.13",
     "@typescript-eslint/eslint-plugin": "^5.13.0",

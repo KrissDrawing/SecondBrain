@@ -9,7 +9,7 @@ import { store } from './redux/app/store';
 
 export type RootStackParams = {
 	Modal: {
-		onHabitCheckPress: () => void;
+		habitId: string;
 	};
 	HabitsTracker: undefined;
 };
