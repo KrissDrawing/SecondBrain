@@ -8,14 +8,15 @@ import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/n
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
   }
 }
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
+  HabitCheckModal: undefined;
+  HabitCreateModal: undefined;
   NotFound: undefined;
 };
 

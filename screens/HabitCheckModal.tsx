@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParams } from '../App';
 import { useCheckHabitMutation, useDeleteHabitMutation } from '../redux/features/habits';
 
-type Props = NativeStackScreenProps<RootStackParams, 'Modal'>
+type Props = NativeStackScreenProps<RootStackParams, 'HabitCheckModal'>
 
 export default function HabitCheckModal({ route, navigation }: Props) {
 	const { habitId } = route.params;

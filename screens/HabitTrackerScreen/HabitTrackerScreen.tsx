@@ -44,7 +44,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 							<Pressable
 								style={[styles.habitCheck, habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}
 								onPress={() =>
-									navigation.navigate('Modal', {
+									navigation.navigate('HabitCheckModal', {
 										habitId: habit.id,
 									})
 								}>

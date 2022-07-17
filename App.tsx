@@ -8,9 +8,10 @@ import Navigation from './navigation';
 import { store } from './redux/app/store';
 
 export type RootStackParams = {
-	Modal: {
+	HabitCheckModal: {
 		habitId: string;
 	};
+	HabitCreateModal: undefined;
 	HabitsTracker: undefined;
 };
 
