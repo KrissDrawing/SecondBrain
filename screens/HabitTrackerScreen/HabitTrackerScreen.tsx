@@ -2,37 +2,20 @@ import {
 	Text,
 	ScrollView,
 	StyleSheet,
-	TextInput,
 	View,
-	NativeSyntheticEvent,
-	TextInputChangeEventData,
-	Button,
 	Pressable,
 	ActivityIndicator,
 } from 'react-native';
-import { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
-import { useAddHabitMutation, useGetHabitsQuery } from '../../redux/features/habits';
+import { useGetHabitsQuery } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
-	const [habitName, setHabitName] = useState('');
-
 	const { data, error, isLoading } = useGetHabitsQuery();
-	const [addHabit, { isLoading: addHabitLoading }] = useAddHabitMutation();
-
-	const handleHabitChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-		setHabitName(e.nativeEvent.text);
-	};
-
-	const handleAddHabit = () => {
-		void addHabit({ name: habitName, checked: false });
-		// TODO: handle errors
-	};
 
 	if (!data && isLoading) {
 		return (
@@ -44,15 +27,9 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 
 	return (
 		<View>
-			<View style={styles.addHabit}>
-				<>
-					<TextInput value={habitName} style={styles.textInput} onChange={handleHabitChange} />
-					<Button title="Add" disabled={addHabitLoading} onPress={handleAddHabit} />
-				</>
-			</View>
 			<View style={styles.firstRow}>
 				<View style={styles.dayPanel}>
-					<Text>Dzień</Text>
+					<Text>Day</Text>
 				</View>
 				<View style={styles.dayPanel}>
 					{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}

@@ -8,8 +8,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import {
+  Button,
+  ColorSchemeName,
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInput, TextInputChangeEventData,
+  View,
+} from 'react-native';
 
+import { useState } from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HabitCheckModal from '../screens/HabitCheckModal';
@@ -18,6 +26,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { HabitTrackerScreen } from '../screens/HabitTrackerScreen';
+import { useAddHabitMutation } from '../redux/features/habits';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -55,6 +64,17 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const [habitName, setHabitName] = useState('');
+  const [addHabit, { isLoading: addHabitLoading }] = useAddHabitMutation();
+
+  const handleHabitChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    setHabitName(e.nativeEvent.text);
+  };
+
+  const handleAddHabit = () => {
+    void addHabit({ name: habitName, checked: false });
+    // TODO: handle errors
+  };
 
   return (
     <BottomTab.Navigator
@@ -69,18 +89,10 @@ function BottomTabNavigator() {
           title: 'Habits Tracker',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+            <View style={styles.addHabit}>
+              <TextInput value={habitName} style={styles.textInput} onChange={handleHabitChange} />
+              <Button title="Add" disabled={addHabitLoading} onPress={handleAddHabit} />
+            </View>
           ),
         })}
       />
@@ -105,3 +117,15 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
+
+const styles = StyleSheet.create({
+  addHabit: {
+    flexDirection: 'row',
+  },
+  textInput: {
+    // flex: 0,
+    color: 'white',
+    backgroundColor: '#333',
+    width: '300px',
+  },
+});

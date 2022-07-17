@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { habitsReducer, habitsApi } from '../features/habits'
+import { habitsApi } from '../features/habits'
 
 export const store = configureStore({
 	reducer: {
-		habits: habitsReducer,
 		[habitsApi.reducerPath]: habitsApi.reducer
 	},
 	middleware: (getDefaultMiddleware) =>
