@@ -1,6 +1,6 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 import { collection, query, getDocs, setDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { DateTime } from 'luxon';
+import { formatISO } from 'date-fns';
 import { HabitType } from './habitsSlice.types';
 import { db } from '../../../core/firebase';
 import { CustomApiError } from '../types';
@@ -29,7 +29,8 @@ export const habitsApi = createApi({
 			queryFn: async (habit) => {
 				try {
 					const newDocRef = doc(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
-					const newHabit = { ...habit, created_at: DateTime.now().toISOTime(), id: newDocRef.id };
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+					const newHabit = { ...habit, created_at: formatISO(new Date()), id: newDocRef.id };
 					await setDoc(newDocRef, newHabit);
 					return { data: newHabit };
 				} catch (e) {

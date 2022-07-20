@@ -1,5 +1,7 @@
 import { Button, StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useAddHabitMutation } from '../../redux/features/habits';
 import {
 	CreateHabitFormType,
@@ -17,6 +19,12 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 		},
 	});
 	const [addHabit, { isLoading: addHabitLoading }] = useAddHabitMutation();
+	const [showDurationPicker, setShowDurationPicker] = useState(false);
+
+	const onChangeDuration = (event, selectedDate) => {
+		console.log(selectedDate);
+		setShowDurationPicker(false);
+	};
 
 	const handleAddHabit = (form: CreateHabitFormType) => {
 		void addHabit({ name: form.name, checked: false });
@@ -31,6 +39,21 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 				render={({ field: { onChange, value } }) => (
 					<StyledTextInput title='name' value={value} onChange={onChange} />
 				)}
+			/>
+			{showDurationPicker && (
+				<DateTimePicker
+					testID="dateTimePicker"
+					value={new Date(1598051730000)}
+					mode='time'
+					is24Hour
+					onChange={onChangeDuration}
+				/>
+			)}
+			<Button
+				title="Duration"
+				onPress={() => {
+					setShowDurationPicker(true);
+				}}
 			/>
 			<Button
 				title="Add"

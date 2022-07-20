@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { DateTime } from 'luxon';
+import { format } from "date-fns";
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
 import { useGetHabitsQuery } from '../../redux/features/habits';
@@ -33,7 +33,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 				</View>
 				<View style={styles.dayPanel}>
 					{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
-					<Text>{DateTime.now().toFormat('ccc, dd LLL')}</Text>
+					<Text>{format(new Date(), 'ccc, dd LLL')}</Text>
 				</View>
 			</View>
 			<View style={{ height: '70vh' }}>
@@ -59,7 +59,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 											color="black"
 										/>
 										{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
-										<Text>{DateTime?.fromISO(habit.created_at).toFormat('hh:mm')}</Text>
+										<Text>{format(Date.now(), 'HH:mm')}</Text>
 									</View>
 								)}
 							</Pressable>
@@ -77,11 +77,11 @@ const styles = StyleSheet.create({
 	},
 	dayPanel: {
 		backgroundColor: 'white',
-		height: 'calc(10vh + 10px)',
+		height: 100,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		width: '100px',
+		width: 100,
 	},
 	loaderRoot: {
 		flex: 1,
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: '10vh',
-		width: '50vw',
+		height: 100,
+		width: '50%',
 	},
 	textInput: {
 		flex: 0,
 		color: 'white',
 		backgroundColor: '#333',
-		width: '300px',
+		width: 300,
 	},
 	habitField: {
 		color: 'red',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 	},
 	checkedIcon: {
 		opacity: 0.7,
-		margin: '5px',
+		margin: 5,
 	},
 	uncheckedHabit: {
 		backgroundColor: '#689399',

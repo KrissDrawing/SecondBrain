@@ -13,8 +13,8 @@ export function HabitField(props: HabitFieldProps) {
 const styles = StyleSheet.create({
 	root: {
 		flex: 1,
-		width: '50vw',
-		height: '10vh',
+		width: '50%',
+		height: 100,
 		color: 'white',
 		display: 'flex',
 		alignItems: 'center',
