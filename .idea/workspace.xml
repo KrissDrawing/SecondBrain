@@ -4,10 +4,15 @@
     <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: don't use vw and vh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/firebase/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/core/firebase/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/StyledTextInput/StyledTextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/StyledTextInput/StyledTextInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/firebase/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitCreateModal/HabitCreateModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateModal/HabitCreateModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +130,8 @@
       <workItem from="1657990659782" duration="12311000" />
       <workItem from="1658163486311" duration="2751000" />
       <workItem from="1658251140337" duration="3092000" />
-      <workItem from="1658339910341" duration="1611000" />
+      <workItem from="1658339910341" duration="5268000" />
+      <workItem from="1658424297814" duration="6328000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -211,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658341732739</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: don't use vw and vh">
+      <created>1658342020384</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1658342020384</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

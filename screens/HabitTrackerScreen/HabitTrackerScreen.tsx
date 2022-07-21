@@ -1,14 +1,7 @@
-import {
-	Text,
-	ScrollView,
-	StyleSheet,
-	View,
-	Pressable,
-	ActivityIndicator,
-} from 'react-native';
+import { Text, ScrollView, StyleSheet, View, Pressable, ActivityIndicator } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { format } from "date-fns";
+import { format } from 'date-fns';
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
 import { useGetHabitsQuery } from '../../redux/features/habits';
@@ -27,7 +20,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 
 	return (
 		<View>
-			<View style={styles.firstRow}>
+			 <View style={styles.firstRow}>
 				<View style={styles.dayPanel}>
 					<Text>Day</Text>
 				</View>
@@ -35,12 +28,14 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 					{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
 					<Text>{format(new Date(), 'ccc, dd LLL')}</Text>
 				</View>
-			</View>
-			<View style={{ height: '70vh' }}>
+			 </View>
+			 <View style={{ height: '70%' }}>
 				<ScrollView>
-					{data!.map((habit) => (
+					{data?.map((habit) => (
 						<View style={styles.habitRow} key={habit.id}>
-							<HabitField habit={habit.name} />
+							<View style={{flex: 1}}>
+								<HabitField habit={habit.name} />
+							</View>
 							<Pressable
 								style={[styles.habitCheck, habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}
 								onPress={() =>
@@ -66,7 +61,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 						</View>
 					))}
 				</ScrollView>
-			</View>
+			 </View>
 		</View>
 	);
 }
@@ -81,7 +76,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		width: 100,
 	},
 	loaderRoot: {
 		flex: 1,
@@ -96,10 +90,10 @@ const styles = StyleSheet.create({
 	},
 	habitCheck: {
 		display: 'flex',
+		flex:1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 100,
-		width: '50%',
 	},
 	textInput: {
 		flex: 0,

@@ -21,7 +21,7 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 	const [addHabit, { isLoading: addHabitLoading }] = useAddHabitMutation();
 	const [showDurationPicker, setShowDurationPicker] = useState(false);
 
-	const onChangeDuration = (event, selectedDate) => {
+	const onChangeDuration = (event: any, selectedDate: any) => {
 		console.log(selectedDate);
 		setShowDurationPicker(false);
 	};
@@ -33,14 +33,14 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 
 	return (
 		<View style={styles.container}>
-			<Controller
+			 <Controller
 				control={control}
 				name="name"
 				render={({ field: { onChange, value } }) => (
-					<StyledTextInput title='name' value={value} onChange={onChange} />
+					<StyledTextInput title='name' value={value} onChangeText={onChange} />
 				)}
-			/>
-			{showDurationPicker && (
+			 />
+			 {showDurationPicker && (
 				<DateTimePicker
 					testID="dateTimePicker"
 					value={new Date(1598051730000)}
@@ -48,18 +48,19 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 					is24Hour
 					onChange={onChangeDuration}
 				/>
-			)}
-			<Button
+			 )}
+			 <Button
 				title="Duration"
 				onPress={() => {
 					setShowDurationPicker(true);
 				}}
-			/>
+			 />
 			<Button
 				title="Add"
 				disabled={addHabitLoading}
 				onPress={() => {
-					handleSubmit(handleAddHabit);
+					// handleSubmit(handleAddHabit);
+					void addHabit({ name: 'form.name', checked: false })
 					goBack();
 				}}
 			/>

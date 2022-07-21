@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		padding: 10,
 		color: 'white',
-		width: '300px',
+		width: 300,
 	},
 	title: {
 		color: '#ccc',

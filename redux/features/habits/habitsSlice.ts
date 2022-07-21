@@ -1,8 +1,7 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-import { collection, query, getDocs, setDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import { formatISO } from 'date-fns';
 import { HabitType } from './habitsSlice.types';
-import { db } from '../../../core/firebase';
 import { CustomApiError } from '../types';
 
 export const habitsApi = createApi({
@@ -13,9 +12,8 @@ export const habitsApi = createApi({
 			queryFn: async () => {
 				try {
 					const habits: HabitType[] = [];
-					const q = query(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
-
-					const querySnapshot = await getDocs(q);
+					// const q = query(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
+					const querySnapshot = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').get();
 					querySnapshot.forEach((docTmp) => {
 						habits.push({ ...docTmp.data(), id: docTmp.id } as HabitType);
 					});
@@ -28,10 +26,9 @@ export const habitsApi = createApi({
 		addHabit: builder.mutation<HabitType, Omit<HabitType, 'id' | 'created_at'>>({
 			queryFn: async (habit) => {
 				try {
-					const newDocRef = doc(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+					const newDocRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').doc();
 					const newHabit = { ...habit, created_at: formatISO(new Date()), id: newDocRef.id };
-					await setDoc(newDocRef, newHabit);
+					await newDocRef.set(newHabit);
 					return { data: newHabit };
 				} catch (e) {
 					return { error: { message: 'cant add habits' } };
@@ -53,8 +50,7 @@ export const habitsApi = createApi({
 		checkHabit: builder.mutation<null, string>({
 			queryFn: async (habitId) => {
 				try {
-					const docRef = doc(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits', habitId);
-					await updateDoc(docRef, {
+					await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habitId}`).update({
 						checked: true,
 					});
 					return { data: null };
@@ -79,8 +75,7 @@ export const habitsApi = createApi({
 		deleteHabit: builder.mutation<null, string>({
 			queryFn: async (habitId) => {
 				try {
-					const docRef = doc(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits', habitId);
-					await deleteDoc(docRef);
+					await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habitId}`).delete();
 					return { data: null };
 				} catch (e) {
 					return { error: { message: `can't delete current habit` } };

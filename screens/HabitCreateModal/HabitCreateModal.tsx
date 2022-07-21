@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
 	textInput: {
 		color: 'white',
 		backgroundColor: '#333',
-		width: '300px',
+		width: 300,
 	},
 });
