@@ -6,6 +6,7 @@ module.exports = {
 		'airbnb/hooks',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'@react-native-community',
 		'prettier',
 	],
 	parser: '@typescript-eslint/parser',

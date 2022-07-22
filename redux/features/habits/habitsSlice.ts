@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 import { formatISO } from 'date-fns';
 import { HabitType } from './habitsSlice.types';
 import { CustomApiError } from '../types';
+import { CreateHabitFormType } from '../../../screens/HabitCreateForm/HabitCreateForm.types';
 
 export const habitsApi = createApi({
 	reducerPath: 'habitsApi',
@@ -23,11 +24,17 @@ export const habitsApi = createApi({
 				}
 			},
 		}),
-		addHabit: builder.mutation<HabitType, Omit<HabitType, 'id' | 'created_at'>>({
+		addHabit: builder.mutation<HabitType, CreateHabitFormType>({
 			queryFn: async (habit) => {
 				try {
 					const newDocRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').doc();
-					const newHabit = { ...habit, created_at: formatISO(new Date()), id: newDocRef.id };
+					const newHabit = {
+						...habit,
+						checked: false,
+						created_at: formatISO(new Date()),
+						started_at: habit.started_at ? formatISO(habit.started_at) : null,
+						id: newDocRef.id,
+					};
 					await newDocRef.set(newHabit);
 					return { data: newHabit };
 				} catch (e) {

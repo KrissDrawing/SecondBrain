@@ -8,7 +8,7 @@ import { useGetHabitsQuery } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
-	const { data, error, isLoading } = useGetHabitsQuery();
+	const { data, isLoading } = useGetHabitsQuery();
 
 	if (!data && isLoading) {
 		return (
@@ -20,20 +20,19 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 
 	return (
 		<View>
-			 <View style={styles.firstRow}>
+			<View style={styles.firstRow}>
 				<View style={styles.dayPanel}>
 					<Text>Day</Text>
 				</View>
 				<View style={styles.dayPanel}>
-					{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
 					<Text>{format(new Date(), 'ccc, dd LLL')}</Text>
 				</View>
-			 </View>
-			 <View style={{ height: '70%' }}>
+			</View>
+			<View style={{ height: '70%' }}>
 				<ScrollView>
 					{data?.map((habit) => (
 						<View style={styles.habitRow} key={habit.id}>
-							<View style={{flex: 1}}>
+							<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#abc' }}>
 								<HabitField habit={habit.name} />
 							</View>
 							<Pressable
@@ -53,15 +52,15 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 											size={50}
 											color="black"
 										/>
-										{/* eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */}
-										<Text>{format(Date.now(), 'HH:mm')}</Text>
+										{}
+										<Text>{habit.started_at && format(new Date(habit.started_at), 'HH:mm')}</Text>
 									</View>
 								)}
 							</Pressable>
 						</View>
 					))}
 				</ScrollView>
-			 </View>
+			</View>
 		</View>
 	);
 }
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
 	},
 	habitCheck: {
 		display: 'flex',
-		flex:1,
+		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 100,

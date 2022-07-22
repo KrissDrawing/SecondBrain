@@ -1,5 +1,5 @@
 export interface HabitsState {
-	habitsList: HabitType[]
+	habitsList: HabitType[];
 }
 
 export interface HabitType {
@@ -7,4 +7,5 @@ export interface HabitType {
 	id: string;
 	checked: boolean;
 	created_at: string;
+	started_at: string | null;
 }

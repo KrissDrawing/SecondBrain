@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: don't use vw and vh">
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: handle adding habit with start time">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HabitField/HabitField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/StyledTextInput/StyledTextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/StyledTextInput/StyledTextInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/firebase/index.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/features/habits/habitsSlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCheckModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HabitCreateModal/HabitCreateModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateModal/HabitCreateModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -131,7 +131,8 @@
       <workItem from="1658163486311" duration="2751000" />
       <workItem from="1658251140337" duration="3092000" />
       <workItem from="1658339910341" duration="5268000" />
-      <workItem from="1658424297814" duration="6328000" />
+      <workItem from="1658424297814" duration="6413000" />
+      <workItem from="1658506828491" duration="6296000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -224,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658342020384</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: update habitsSlice.ts to use react-native-firebase">
+      <created>1658430981344</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1658430981344</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +264,9 @@
     <MESSAGE value="feat: Separate HabitCreateForm, add StyledTextInput" />
     <MESSAGE value="feat: add firebase config for android and ios to app.json" />
     <MESSAGE value="feat: don't use vw and vh" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: don't use vw and vh" />
+    <MESSAGE value="feat: update habitsSlice.ts to use react-native-firebase" />
+    <MESSAGE value="feat: handle adding habit with start time" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: handle adding habit with start time" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

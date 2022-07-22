@@ -1,10 +1,10 @@
 import { Button, StyleSheet, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-// eslint-disable-next-line import/extensions
+
 import { RootStackParams } from '../App';
 import { useCheckHabitMutation, useDeleteHabitMutation } from '../redux/features/habits';
 
-type Props = NativeStackScreenProps<RootStackParams, 'HabitCheckModal'>
+type Props = NativeStackScreenProps<RootStackParams, 'HabitCheckModal'>;
 
 export default function HabitCheckModal({ route, navigation }: Props) {
 	const { habitId } = route.params;
@@ -13,14 +13,20 @@ export default function HabitCheckModal({ route, navigation }: Props) {
 
 	return (
 		<View style={styles.container}>
-			<Button title="accept" onPress={() => {
-				void checkHabit(habitId);
-				navigation.goBack();
-			}} />
-			<Button title="delete" onPress={() => {
-				void deleteHabit(habitId);
-				navigation.goBack();
-			}} />
+			<Button
+				title="accept"
+				onPress={() => {
+					void checkHabit(habitId);
+					navigation.goBack();
+				}}
+			/>
+			<Button
+				title="delete"
+				onPress={() => {
+					void deleteHabit(habitId);
+					navigation.goBack();
+				}}
+			/>
 		</View>
 	);
 }
