@@ -8,6 +8,8 @@ import { StyledTextInput } from '../../components/StyledTextInput';
 import { formatTime } from '../../utils/formatDate';
 
 export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
+	const durationDate = new Date();
+	durationDate.setHours(0, 0, 0, 0);
 	const { control, handleSubmit, setValue, getValues } = useForm<CreateHabitFormType>({
 		defaultValues: {
 			name: '',
@@ -59,7 +61,7 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 				<Controller
 					control={control}
 					name="duration"
-					defaultValue={new Date()}
+					defaultValue={durationDate}
 					render={({ field: { value } }) => (
 						<DateTimePicker value={value} display="spinner" mode="time" is24Hour onChange={onChangeDurationPicker} />
 					)}
