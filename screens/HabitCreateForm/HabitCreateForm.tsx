@@ -28,7 +28,7 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.root}>
 			<Controller
 				control={control}
 				name="name"
@@ -60,7 +60,7 @@ export function HabitCreateForm({ goBack }: HabitCreateFormProps) {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	root: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
