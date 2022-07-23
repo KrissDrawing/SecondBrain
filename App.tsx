@@ -11,6 +11,7 @@ import { HabitType } from './redux/features/habits';
 export type RootStackParams = {
 	HabitCheckModal: {
 		habit: HabitType;
+		dayShift: number;
 	};
 	HabitCreateModal: undefined;
 	HabitsTracker: undefined;

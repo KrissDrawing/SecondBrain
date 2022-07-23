@@ -5,4 +5,5 @@ export interface HabitCreateFormProps {
 export interface CreateHabitFormType {
 	name: string;
 	started_at: Date;
+	duration: Date;
 }

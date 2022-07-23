@@ -4,5 +4,6 @@ import { RootStackParams } from '../../App';
 
 export interface HabitFieldProps {
 	habit: HabitType;
+	dayShift: number;
 	navigation: NativeStackNavigationProp<RootStackParams, 'HabitsTracker', undefined>;
 }

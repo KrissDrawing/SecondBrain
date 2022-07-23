@@ -1,13 +1,15 @@
 import { Text, ScrollView, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { format } from 'date-fns';
+import { useState } from 'react';
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
 import { useGetHabitsQuery } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
-	const { data, isLoading } = useGetHabitsQuery(0);
+	const [dayShift, setDayShift] = useState(0);
+	const { data, isLoading } = useGetHabitsQuery(dayShift);
 
 	if (!data && isLoading) {
 		return (
@@ -30,7 +32,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 			<View style={styles.scrollViewWrapper}>
 				<ScrollView>
 					{data?.map((habit) => (
-						<HabitField key={habit.id} habit={habit} navigation={navigation} />
+						<HabitField key={habit.id} habit={habit} dayShift={dayShift} navigation={navigation} />
 					))}
 				</ScrollView>
 			</View>

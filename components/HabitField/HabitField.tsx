@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { HabitFieldProps } from './HabitField.types';
 
 export function HabitField(props: HabitFieldProps) {
-	const { habit, navigation } = props;
+	const { habit, dayShift, navigation } = props;
 	return (
 		<View style={styles.root}>
 			<View style={styles.habitNameRoot}>
@@ -17,6 +17,7 @@ export function HabitField(props: HabitFieldProps) {
 				onPress={() =>
 					navigation.navigate('HabitCheckModal', {
 						habit,
+						dayShift,
 					})
 				}>
 				{habit.checked ? (

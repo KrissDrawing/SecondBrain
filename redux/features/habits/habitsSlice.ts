@@ -4,7 +4,7 @@ import { formatISO } from 'date-fns';
 import { HabitType } from './habitsSlice.types';
 import { CustomApiError } from '../types';
 import { CreateHabitFormType } from '../../../screens/HabitCreateForm/HabitCreateForm.types';
-import { dateFromNow } from '../../../utils/formatDate';
+import { dateFromNow, durationFromPicker } from '../../../utils/formatDate';
 
 export const habitsApi = createApi({
 	reducerPath: 'habitsApi',
@@ -53,6 +53,7 @@ export const habitsApi = createApi({
 						checked: false,
 						created_at: formatISO(new Date()),
 						started_at: habit.started_at ? formatISO(habit.started_at) : null,
+						duration: habit.duration ? durationFromPicker(new Date(habit.duration)) : null,
 						id: newDocRef.id,
 					};
 					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
@@ -90,10 +91,12 @@ export const habitsApi = createApi({
 				}
 			},
 		}),
-		checkHabit: builder.mutation<null, HabitType>({
-			queryFn: async (habit) => {
+		checkHabit: builder.mutation<null, { habit: HabitType; dayShift: number }>({
+			queryFn: async ({ habit, dayShift }) => {
 				try {
-					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+					const habitsListRef = firestore()
+						.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+						.doc(dateFromNow(dayShift));
 					await habitsListRef.update({
 						data: firestore.FieldValue.arrayRemove(habit),
 					});
@@ -105,7 +108,7 @@ export const habitsApi = createApi({
 					return { error: { message: `can't update current habit` } };
 				}
 			},
-			async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+			async onQueryStarted({ habit: { id } }, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(

@@ -16,6 +16,7 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/no-use-before-define': 'off',
 		'@typescript-eslint/no-non-null-assertion': 'off',
+		'@typescript-eslint/no-unused-vars': 'warn',
 		'import/prefer-default-export': 'off',
 		'import/extensions': 'off',
 		'react/react-in-jsx-scope': 'off',
