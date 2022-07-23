@@ -46,33 +46,37 @@ export const habitsApi = createApi({
 		}),
 		addHabit: builder.mutation<HabitType, CreateHabitFormType>({
 			queryFn: async (habit) => {
+				const batch = firestore().batch();
+				const newDocRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').doc();
+				const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+				const habitsTrackingRef = firestore()
+					.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+					.doc(dateFromNow());
+				const newHabit = {
+					...habit,
+					checked: false,
+					created_at: formatISO(new Date()),
+					started_at: habit.started_at ? formatISO(habit.started_at) : null,
+					duration: habit.duration ? durationFromPicker(new Date(habit.duration)) : null,
+					id: newDocRef.id,
+				};
+				batch.set(
+					habitsListRef,
+					{
+						data: firestore.FieldValue.arrayUnion(newHabit),
+					},
+					{ merge: true }
+				);
+				batch.set(
+					habitsTrackingRef,
+					{
+						data: firestore.FieldValue.arrayUnion(newHabit),
+					},
+					{ merge: true }
+				);
+				batch.set(newDocRef, newHabit);
 				try {
-					const newDocRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').doc();
-					const newHabit = {
-						...habit,
-						checked: false,
-						created_at: formatISO(new Date()),
-						started_at: habit.started_at ? formatISO(habit.started_at) : null,
-						duration: habit.duration ? durationFromPicker(new Date(habit.duration)) : null,
-						id: newDocRef.id,
-					};
-					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
-					await habitsListRef.set(
-						{
-							data: firestore.FieldValue.arrayUnion(newHabit),
-						},
-						{ merge: true }
-					);
-					const habitsTrackingRef = firestore()
-						.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
-						.doc(dateFromNow());
-					await habitsTrackingRef.set(
-						{
-							data: firestore.FieldValue.arrayUnion(newHabit),
-						},
-						{ merge: true }
-					);
-					await newDocRef.set(newHabit);
+					await batch.commit();
 					return { data: newHabit };
 				} catch (e) {
 					return { error: { message: 'cant add habits' } };
@@ -93,16 +97,18 @@ export const habitsApi = createApi({
 		}),
 		checkHabit: builder.mutation<null, { habit: HabitType; dayShift: number }>({
 			queryFn: async ({ habit, dayShift }) => {
+				const batch = firestore().batch();
+				const habitsListRef = firestore()
+					.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+					.doc(dateFromNow(dayShift));
+				batch.update(habitsListRef, {
+					data: firestore.FieldValue.arrayRemove(habit),
+				});
+				batch.update(habitsListRef, {
+					data: firestore.FieldValue.arrayUnion({ ...habit, checked: true }),
+				});
 				try {
-					const habitsListRef = firestore()
-						.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
-						.doc(dateFromNow(dayShift));
-					await habitsListRef.update({
-						data: firestore.FieldValue.arrayRemove(habit),
-					});
-					await habitsListRef.update({
-						data: firestore.FieldValue.arrayUnion({ ...habit, checked: true }),
-					});
+					await batch.commit();
 					return { data: null };
 				} catch (e) {
 					return { error: { message: `can't update current habit` } };
@@ -124,21 +130,24 @@ export const habitsApi = createApi({
 		}),
 		deleteHabit: builder.mutation<null, HabitType>({
 			queryFn: async (habit) => {
-				try {
-					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
-					const habitsTrackingRef = firestore()
-						.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
-						.doc(dateFromNow());
+				const batch = firestore().batch();
+				const habitsRef = firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habit.id}`);
+				const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+				const habitsTrackingRef = firestore()
+					.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+					.doc(dateFromNow());
 
-					if (habit) {
-						await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habit.id}`).delete();
-						await habitsListRef.update({
-							data: firestore.FieldValue.arrayRemove({ ...habit, checked: false }),
-						});
-						await habitsTrackingRef.update({
-							data: firestore.FieldValue.arrayRemove(habit),
-						});
-					}
+				if (habit) {
+					batch.delete(habitsRef);
+					batch.update(habitsListRef, {
+						data: firestore.FieldValue.arrayRemove({ ...habit, checked: false }),
+					});
+					batch.update(habitsTrackingRef, {
+						data: firestore.FieldValue.arrayRemove(habit),
+					});
+				}
+				try {
+					await batch.commit();
 					return { data: null };
 				} catch (e) {
 					return { error: { message: `can't delete current habit` } };
