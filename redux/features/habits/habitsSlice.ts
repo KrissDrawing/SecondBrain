@@ -126,10 +126,16 @@ export const habitsApi = createApi({
 			queryFn: async (habit) => {
 				try {
 					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+					const habitsTrackingRef = firestore()
+						.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+						.doc(dateFromNow());
 
 					if (habit) {
 						await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habit.id}`).delete();
 						await habitsListRef.update({
+							data: firestore.FieldValue.arrayRemove({ ...habit, checked: false }),
+						});
+						await habitsTrackingRef.update({
 							data: firestore.FieldValue.arrayRemove(habit),
 						});
 					}
