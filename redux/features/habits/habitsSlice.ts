@@ -13,12 +13,16 @@ export const habitsApi = createApi({
 			queryFn: async () => {
 				try {
 					const habits: HabitType[] = [];
-					// const q = query(collection(db, 'users', 'bt9NWyPenn6L6w2vQUzS', 'habits'));
-					const querySnapshot = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').get();
-					querySnapshot.forEach((docTmp) => {
-						habits.push({ ...docTmp.data(), id: docTmp.id } as HabitType);
-					});
-					return { data: habits };
+					const habitsList = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data').get();
+					if (habitsList.exists) {
+						return { data: habitsList.data()!.data as HabitType[] };
+					} else {
+						const querySnapshot = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').get();
+						querySnapshot.forEach((docTmp) => {
+							habits.push({ ...docTmp.data() } as HabitType);
+						});
+						return { data: habits };
+					}
 				} catch (e) {
 					return { error: { message: 'cant get habits' } };
 				}
@@ -35,6 +39,13 @@ export const habitsApi = createApi({
 						started_at: habit.started_at ? formatISO(habit.started_at) : null,
 						id: newDocRef.id,
 					};
+					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+					await habitsListRef.set(
+						{
+							data: firestore.FieldValue.arrayUnion(newHabit),
+						},
+						{ merge: true }
+					);
 					await newDocRef.set(newHabit);
 					return { data: newHabit };
 				} catch (e) {
@@ -54,18 +65,22 @@ export const habitsApi = createApi({
 				}
 			},
 		}),
-		checkHabit: builder.mutation<null, string>({
-			queryFn: async (habitId) => {
+		checkHabit: builder.mutation<null, HabitType>({
+			queryFn: async (habit) => {
 				try {
-					await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habitId}`).update({
-						checked: true,
+					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+					await habitsListRef.update({
+						data: firestore.FieldValue.arrayRemove(habit),
+					});
+					await habitsListRef.update({
+						data: firestore.FieldValue.arrayUnion({ ...habit, checked: true }),
 					});
 					return { data: null };
 				} catch (e) {
 					return { error: { message: `can't update current habit` } };
 				}
 			},
-			async onQueryStarted(id, { dispatch, queryFulfilled }) {
+			async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(
@@ -79,16 +94,23 @@ export const habitsApi = createApi({
 				}
 			},
 		}),
-		deleteHabit: builder.mutation<null, string>({
-			queryFn: async (habitId) => {
+		deleteHabit: builder.mutation<null, HabitType>({
+			queryFn: async (habit) => {
 				try {
-					await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habitId}`).delete();
+					const habitsListRef = firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data');
+
+					if (habit) {
+						await firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habits/${habit.id}`).delete();
+						await habitsListRef.update({
+							data: firestore.FieldValue.arrayRemove(habit),
+						});
+					}
 					return { data: null };
 				} catch (e) {
 					return { error: { message: `can't delete current habit` } };
 				}
 			},
-			async onQueryStarted(id, { dispatch, queryFulfilled }) {
+			async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(

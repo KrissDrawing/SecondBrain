@@ -6,10 +6,11 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { store } from './redux/app/store';
+import { HabitType } from './redux/features/habits';
 
 export type RootStackParams = {
 	HabitCheckModal: {
-		habitId: string;
+		habit: HabitType;
 	};
 	HabitCreateModal: undefined;
 	HabitsTracker: undefined;

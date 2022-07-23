@@ -16,7 +16,7 @@ export function HabitField(props: HabitFieldProps) {
 				style={[styles.habitCheck, habit.checked ? styles.checkedHabit : styles.uncheckedHabit]}
 				onPress={() =>
 					navigation.navigate('HabitCheckModal', {
-						habitId: habit.id,
+						habit,
 					})
 				}>
 				{habit.checked ? (

@@ -7,7 +7,7 @@ import { useCheckHabitMutation, useDeleteHabitMutation } from '../redux/features
 type Props = NativeStackScreenProps<RootStackParams, 'HabitCheckModal'>;
 
 export default function HabitCheckModal({ route, navigation }: Props) {
-	const { habitId } = route.params;
+	const { habit } = route.params;
 	const [checkHabit] = useCheckHabitMutation();
 	const [deleteHabit] = useDeleteHabitMutation();
 
@@ -16,14 +16,14 @@ export default function HabitCheckModal({ route, navigation }: Props) {
 			<Button
 				title="accept"
 				onPress={() => {
-					void checkHabit(habitId);
+					void checkHabit(habit);
 					navigation.goBack();
 				}}
 			/>
 			<Button
 				title="delete"
 				onPress={() => {
-					void deleteHabit(habitId);
+					void deleteHabit(habit);
 					navigation.goBack();
 				}}
 			/>
