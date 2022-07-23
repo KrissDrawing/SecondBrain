@@ -7,7 +7,7 @@ import { useGetHabitsQuery } from '../../redux/features/habits';
 
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
-	const { data, isLoading } = useGetHabitsQuery();
+	const { data, isLoading } = useGetHabitsQuery(0);
 
 	if (!data && isLoading) {
 		return (
