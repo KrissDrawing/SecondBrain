@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: use batch to add, check and delete habits">
+    <list default="true" id="bdc1c19d-37af-4ef1-b60e-da53475b44c9" name="Changes" comment="feat: default duration in create habit to 00:00">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitCreateForm/HabitCreateForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/features/habits/habitsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HabitTrackerScreen/HabitTrackerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +127,8 @@
       <workItem from="1658339910341" duration="5268000" />
       <workItem from="1658424297814" duration="6413000" />
       <workItem from="1658506828491" duration="20859000" />
-      <workItem from="1658597831312" duration="2763000" />
+      <workItem from="1658597831312" duration="3836000" />
+      <workItem from="1658648479683" duration="5459000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add eslint + prettier">
       <created>1657560606685</created>
@@ -273,7 +277,28 @@
       <option name="project" value="LOCAL" />
       <updated>1658600052071</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat: default duration to 00:00">
+      <created>1658601890263</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1658601890263</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: default duration to 00:00">
+      <created>1658601903245</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1658601903245</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: default duration in create habit to 00:00">
+      <created>1658601911736</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1658601911736</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +339,9 @@
     <MESSAGE value="feat: add duration to create habit form" />
     <MESSAGE value="feat: handle delete for few collections" />
     <MESSAGE value="feat: use batch to add, check and delete habits" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: use batch to add, check and delete habits" />
+    <MESSAGE value="feat: default duration to 00:00" />
+    <MESSAGE value="feat: default duration in create habit to 00:00" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: default duration in create habit to 00:00" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,7 +10,7 @@ export const habitsApi = createApi({
 	reducerPath: 'habitsApi',
 	baseQuery: fakeBaseQuery<CustomApiError>(),
 	endpoints: (builder) => ({
-		getHabits: builder.query<HabitType[], number>({
+		getHabits: builder.query<{ date: string; habits: HabitType[] }, number>({
 			queryFn: async (dayShift) => {
 				const date = dateFromNow(dayShift);
 				try {
@@ -19,26 +19,36 @@ export const habitsApi = createApi({
 						.doc(date)
 						.get();
 					if (habitsTracking.data()?.data) {
-						// TODO: add date of current displayed day
-						return { data: habitsTracking.data()!.data as HabitType[] };
+						return {
+							data: {
+								date: habitsTracking.data()!.date as string,
+								habits: habitsTracking.data()!.data as HabitType[],
+							},
+						};
 					} else {
 						const habitsList = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habitsList').doc('data').get();
-						if (habitsList.data()?.data) {
-							await firestore()
-								.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
-								.doc(date)
-								// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-								.set({ date, data: habitsList.data()!.data });
-							return { data: habitsList.data()!.data as HabitType[] };
-						} else {
-							const habits: HabitType[] = [];
-							const querySnapshot = await firestore().collection('users/bt9NWyPenn6L6w2vQUzS/habits').get();
-							querySnapshot.forEach((docTmp) => {
-								habits.push({ ...docTmp.data() } as HabitType);
-							});
-							return { data: habits };
+						if (dayShift === 0) {
+							if (habitsList.data()?.data) {
+								await firestore()
+									.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
+									.doc(date)
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+									.set({ date, data: habitsList.data()!.data });
+								return {
+									data: {
+										date,
+										habits: habitsList.data()!.data as HabitType[],
+									},
+								};
+							}
 						}
 					}
+					return {
+						data: {
+							date,
+							habits: [] as HabitType[],
+						},
+					};
 				} catch (e) {
 					return { error: { message: 'cant get habits' } };
 				}
@@ -87,7 +97,7 @@ export const habitsApi = createApi({
 					const { data: updatedHabit } = await queryFulfilled;
 					dispatch(
 						habitsApi.util.updateQueryData('getHabits', 0, (draft) => {
-							draft.push(updatedHabit);
+							draft.habits.push(updatedHabit);
 						})
 					);
 				} catch {
@@ -114,13 +124,13 @@ export const habitsApi = createApi({
 					return { error: { message: `can't update current habit` } };
 				}
 			},
-			async onQueryStarted({ habit: { id } }, { dispatch, queryFulfilled }) {
+			async onQueryStarted({ habit: { id }, dayShift }, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(
-						habitsApi.util.updateQueryData('getHabits', 0, (draft) => {
-							const updatedItemIndex = draft.findIndex((item) => item.id === id);
-							draft[updatedItemIndex] = { ...draft[updatedItemIndex], checked: true };
+						habitsApi.util.updateQueryData('getHabits', dayShift, (draft) => {
+							const updatedItemIndex = draft.habits.findIndex((item) => item.id === id);
+							draft.habits[updatedItemIndex] = { ...draft.habits[updatedItemIndex], checked: true };
 						})
 					);
 				} catch {
@@ -158,8 +168,8 @@ export const habitsApi = createApi({
 					await queryFulfilled;
 					dispatch(
 						habitsApi.util.updateQueryData('getHabits', 0, (draft) => {
-							const updatedItemIndex = draft.findIndex((item) => item.id === id);
-							draft.splice(updatedItemIndex, 1);
+							const updatedItemIndex = draft.habits.findIndex((item) => item.id === id);
+							draft.habits.splice(updatedItemIndex, 1);
 						})
 					);
 				} catch {
