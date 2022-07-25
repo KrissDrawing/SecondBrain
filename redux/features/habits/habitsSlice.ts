@@ -1,7 +1,7 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 import firestore from '@react-native-firebase/firestore';
 import { formatISO } from 'date-fns';
-import { HabitType } from './habitsSlice.types';
+import { HabitStatsType, HabitType } from './habitsSlice.types';
 import { CustomApiError } from '../types';
 import { CreateHabitFormType } from '../../../screens/HabitCreateForm/HabitCreateForm.types';
 import { dateFromNow, durationFromPicker } from '../../../utils/formatDate';
@@ -51,6 +51,16 @@ export const habitsApi = createApi({
 					};
 				} catch (e) {
 					return { error: { message: 'cant get habits' } };
+				}
+			},
+		}),
+		getHabitsStats: builder.query<HabitStatsType, void>({
+			queryFn: async () => {
+				try {
+					const habitsStats = await firestore().doc('users/bt9NWyPenn6L6w2vQUzS/habitsStats/data').get();
+					return { data: habitsStats.data() as HabitStatsType };
+				} catch (e) {
+					return { error: { message: 'cant fetch habit stats' } };
 				}
 			},
 		}),
@@ -128,7 +138,7 @@ export const habitsApi = createApi({
 					return { error: { message: `can't update current habit` } };
 				}
 			},
-			async onQueryStarted({ habit: { id }, dayShift }, { dispatch, queryFulfilled }) {
+			async onQueryStarted({ habit: { id }, dayShift, shouldCheckDay }, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(
@@ -137,6 +147,13 @@ export const habitsApi = createApi({
 							draft.habits[updatedItemIndex] = { ...draft.habits[updatedItemIndex], checked: true };
 						})
 					);
+					if (shouldCheckDay) {
+						dispatch(
+							habitsApi.util.updateQueryData('getHabitsStats', undefined, (draft) => {
+								draft.streak += 1;
+							})
+						);
+					}
 				} catch {
 					console.error(`can't update habit ${id} after check`);
 				}
@@ -184,4 +201,10 @@ export const habitsApi = createApi({
 	}),
 });
 
-export const { useGetHabitsQuery, useAddHabitMutation, useCheckHabitMutation, useDeleteHabitMutation } = habitsApi;
+export const {
+	useGetHabitsQuery,
+	useGetHabitsStatsQuery,
+	useAddHabitMutation,
+	useCheckHabitMutation,
+	useDeleteHabitMutation,
+} = habitsApi;
