@@ -12,6 +12,7 @@ export type RootStackParams = {
 	HabitCheckModal: {
 		habit: HabitType;
 		dayShift: number;
+		shouldCheckDay: boolean;
 	};
 	HabitCreateModal: undefined;
 	HabitsTracker: undefined;

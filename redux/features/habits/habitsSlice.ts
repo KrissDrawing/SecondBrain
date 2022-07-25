@@ -105,8 +105,8 @@ export const habitsApi = createApi({
 				}
 			},
 		}),
-		checkHabit: builder.mutation<null, { habit: HabitType; dayShift: number }>({
-			queryFn: async ({ habit, dayShift }) => {
+		checkHabit: builder.mutation<null, { habit: HabitType; dayShift: number; shouldCheckDay?: boolean }>({
+			queryFn: async ({ habit, dayShift, shouldCheckDay }) => {
 				const batch = firestore().batch();
 				const habitsListRef = firestore()
 					.collection('users/bt9NWyPenn6L6w2vQUzS/habitsTracking')
@@ -117,6 +117,10 @@ export const habitsApi = createApi({
 				batch.update(habitsListRef, {
 					data: firestore.FieldValue.arrayUnion({ ...habit, checked: true }),
 				});
+				if (shouldCheckDay) {
+					const habitsStatsRef = firestore().doc(`users/bt9NWyPenn6L6w2vQUzS/habitsStats/data`);
+					batch.update(habitsStatsRef, { streak: firestore.FieldValue.increment(1) });
+				}
 				try {
 					await batch.commit();
 					return { data: null };
@@ -172,7 +176,7 @@ export const habitsApi = createApi({
 							draft.habits.splice(updatedItemIndex, 1);
 						})
 					);
-				} catch {
+				} catch (e) {
 					console.error(`can't update habit ${id} after delete`);
 				}
 			},

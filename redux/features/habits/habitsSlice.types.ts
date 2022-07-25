@@ -9,3 +9,8 @@ export interface HabitType {
 	created_at: string;
 	started_at: string | null;
 }
+
+export interface HabitStatsType {
+	streak: number;
+	longestStreak: number;
+}

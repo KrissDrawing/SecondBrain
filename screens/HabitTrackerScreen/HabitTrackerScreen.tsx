@@ -1,6 +1,6 @@
 import { Text, ScrollView, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { HabitField } from '../../components/HabitField';
 import { RootStackParams } from '../../App';
@@ -10,7 +10,17 @@ import { dateFromNow } from '../../utils/formatDate';
 export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams, 'HabitsTracker'>) {
 	const { navigation } = props;
 	const [dayShift, setDayShift] = useState(0);
+	const [uncheckedHabitsCount, setUncheckedHabitsCount] = useState<number>(null!);
 	const { data, isLoading } = useGetHabitsQuery(dayShift);
+
+	useEffect(() => {
+		if (data?.habits && data.habits.length > 0) {
+			const uncheckedItem = data.habits.filter((item) => !item.checked);
+			setUncheckedHabitsCount(uncheckedItem.length);
+			return;
+		}
+		setUncheckedHabitsCount(null!);
+	}, [data, dayShift]);
 
 	if (!data?.habits && isLoading) {
 		return (
@@ -32,7 +42,7 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 
 	return (
 		<GestureRecognizer config={config} onSwipeLeft={onSwipeLeft} onSwipeRight={onSwipeRight}>
-			<View style={styles.firstRow}>
+			<View style={[styles.firstRow, uncheckedHabitsCount === 0 ? styles.dayChecked : null]}>
 				<View style={styles.dayPanel}>
 					<Text>Day</Text>
 				</View>
@@ -44,7 +54,13 @@ export function HabitTrackerScreen(props: NativeStackScreenProps<RootStackParams
 				<ScrollView>
 					{data!.habits.length > 0 ? (
 						data!.habits.map((habit) => (
-							<HabitField key={habit.id} habit={habit} dayShift={dayShift} navigation={navigation} />
+							<HabitField
+								key={habit.id}
+								habit={habit}
+								dayShift={dayShift}
+								navigation={navigation}
+								shouldCheckDay={uncheckedHabitsCount === 1}
+							/>
 						))
 					) : (
 						<View>
@@ -61,8 +77,10 @@ const styles = StyleSheet.create({
 	firstRow: {
 		flexDirection: 'row',
 	},
+	dayChecked: {
+		backgroundColor: '#84fa92',
+	},
 	dayPanel: {
-		backgroundColor: 'white',
 		height: 100,
 		flex: 1,
 		justifyContent: 'center',

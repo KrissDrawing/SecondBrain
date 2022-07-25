@@ -6,4 +6,5 @@ export interface HabitFieldProps {
 	habit: HabitType;
 	dayShift: number;
 	navigation: NativeStackNavigationProp<RootStackParams, 'HabitsTracker', undefined>;
+	shouldCheckDay: boolean;
 }

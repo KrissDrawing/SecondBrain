@@ -7,7 +7,7 @@ import { useCheckHabitMutation, useDeleteHabitMutation } from '../redux/features
 type Props = NativeStackScreenProps<RootStackParams, 'HabitCheckModal'>;
 
 export default function HabitCheckModal({ route, navigation }: Props) {
-	const { habit, dayShift = 0 } = route.params;
+	const { habit, dayShift = 0, shouldCheckDay = false } = route.params;
 	const [checkHabit] = useCheckHabitMutation();
 	const [deleteHabit] = useDeleteHabitMutation();
 
@@ -16,7 +16,7 @@ export default function HabitCheckModal({ route, navigation }: Props) {
 			<Button
 				title="accept"
 				onPress={() => {
-					void checkHabit({ habit, dayShift });
+					void checkHabit({ habit, dayShift, shouldCheckDay });
 					navigation.goBack();
 				}}
 			/>
